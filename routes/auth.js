@@ -3,7 +3,7 @@ const User = require('../model/User');
 
 router.post('/isreg',async (req,res)=> {
     console.log(req.body.id);
-        await User.findOne({ id: req.body.id }, function(err, result) {
+        await User.findOne({ id: req.body.id }).select('id email name').exec(function(err, result) {
             if (err) {
               res.status(400).send(err);
             } else {
@@ -14,10 +14,6 @@ router.post('/isreg',async (req,res)=> {
                 }
             }
           });
-});
-
-router.get('/test',async (req,res)=> {
-    res.send("aaaaaa");
 });
 
 router.post('/register',async (req,res)=> {
